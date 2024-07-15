@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="" th:href="@{/css/bootstrap.min.css}">
+    <script src="" th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        .shadow-3d {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+            0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-3d {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+            0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body style="background:#e2e2e2">
+
+<div class="container">
+    <div class="row mt-4 offset-md-2">
+        <div class="col-md-10">
+            <div class="alert alert-success my-4 shadow-3d" role="alert">
+                <h4 class="alert-heading">Data successfully Fetched!!!</h4>
+                <p>Data is Fetched live from Weather API</p>
+                <hr>
+                <p class="mb-0">This Page was Created by Akshay</p>
+            </div>
+            <div class="card border-primary shadow-3d">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="card border-0 row">
+                            <h5 class="card-title text-center text-primary-emphasis italic">
+                                Weather of <span th:text="${location.getString('name')}"></span>
+                            </h5>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-decoration-underline">Locational Info:</h6>
+                                <h6>Status of Weather in <span th:text="${location.getString('name')}"></span>:</h6>
+                                <h6>Regional Address:</h6>
+                                <h6>Latitude and Longitude:</h6>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-decoration-underline">Data:</h6>
+                                <h6 th:text="${current.getJSONObject('condition').getString('text')}"></h6>
+                                <h6 th:text="${location.getString('region')} + ', ' + ${location.getString('country')}"></h6>
+                                <h6 th:text="${location.getBigDecimal('lat')} + ', ' + ${location.getBigDecimal('lon')}"></h6>
+                            </div>
+                            <div class="col justify-content-center text-center">
+                                <img style="width:5rem;" th:src="${current.getJSONObject('condition').getString('icon')}" alt="">
+                                <h3 th:text="${current.getBigDecimal('temp_c')} + ${'°C'}"></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-4">
+                                <h6 class="text-decoration-underline">Current Info:</h6>
+                                <h6>Current date time:</h6>
+                                <h6>Humidity:</h6>
+                                <h6>Wind Speed and Direction:</h6>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="text-decoration-underline">Data:</h6>
+                                <h6 th:text="${location.getString('localtime')}"></h6>
+                                <h6 th:text="${current.getInt('humidity')}"></h6>
+                                <h6 th:text="${current.getInt('wind_kph')} + ', ' + ${current.getString('wind_dir')}"></h6>
+                            </div>
+                            <div class="col justify-content-center text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container text-center">
+                        <button type="button" class="btn btn-primary btn-3d">
+                            <a class="text-decoration-none text-black" href="" th:href="@{/home}">Return Back to Search Page</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

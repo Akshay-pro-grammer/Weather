@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="" th:href="@{/css/bootstrap.min.css}">
+    <script src="" th:src="@{/js/bootstrap.min.js}"></script>
+    <style>
+        .shadow-3d {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+            0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        .btn-3d {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1),
+            0 6px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .btn-3d:active {
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body style="background:#e2e2e2">
+<div class="container">
+    <div class="row mt-4">
+        <div class="col-md-6 offset-md-3">
+            <form class="bg-white p-4 shadow-3d" th:action="@{/submit}" method="post" th:object="${apiHandler}">
+                <h1 class="text-center">
+                    My Weather App
+                </h1>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label bold">Enter city</label>
+                    <input type="text"
+                           class="form-control"
+                           th:field="*{city}"
+                           id="exampleInputEmail1"
+                           aria-describedby="emailHelp">
+                </div>
+                <div class="container text-center">
+                    <button type="submit" class="btn btn-primary btn-3d">Get Weather</button>
+                </div>
+            </form>
+            <div class="alert alert-warning shadow-3d" role="alert">
+                Make sure to type the correct Spelling!
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
